@@ -1,17 +1,20 @@
 [Unit]
-Description=Coin Daemon
+Description=WAZN Pool Daemon
 After=network.target
 
 [Service]
+User=pool
+Group=pool
+WorkingDirectory=~
+RuntimeDirectory=pool
+
 Type=forking
-GuessMainPID=no
+PIDFile=/run/pool/waznd.pid
+
+ExecStart=/usr/local/bin/waznd --rpc-bind-ip 0.0.0.0 --confirm-external-bind --config-file /etc/waznd.conf \
+    --detach --pidfile /run/pool/waznd.pid
+
 Restart=always
-
-# Change this line to set the location of your coin daemon
-ExecStart=/path/to/coin/coind --rpc-bind-ip 0.0.0.0 --confirm-external-bind --detach
-
-# Change this line to the user that will run your coin daemon
-User=pool-user
 
 [Install]
 WantedBy=multi-user.target

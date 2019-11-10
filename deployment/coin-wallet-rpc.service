@@ -1,16 +1,15 @@
 [Unit]
-Description=Wallet RPC Daemon
+Description=WAZN Pool RPC Daemon
 After=network.target
 
 [Service]
+User=pool
+Group=pool
+
 Type=simple
+ExecStart=/usr/local/bin/wazn-wallet-cli --rpc-bind-ip=127.0.0.1 --rpc-bind-port=11787 --wallet=/etc/pool --password=wallet_password
+
 Restart=always
-
-# Change this line to set the location of your coin wallet RPC daemon and set the RPC port you want to use
-ExecStart=/path/to/coin/wallet-rpc --rpc-bind-ip=127.0.0.1 --rpc-bind-port=5432 --wallet=/path/to/wallet --password=your.wallet.password!
-
-# Change this line to the user that will run your wallet RPC daemon
-User=pool-user
 
 [Install]
 WantedBy=multi-user.target

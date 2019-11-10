@@ -1,19 +1,17 @@
 [Unit]
-Description=Mining Pool Service
+Description=WAZN Pool Service
 After=network.target
 
 [Service]
+User=pool
+Group=pool
+WorkingDirectory=/var/wazn-pool/pool
+
 Type=simple
-Restart=always
-SyslogIdentifier=cryptonote-nodejs-pool
+SyslogIdentifier=wazn-pool
 ExecStart=/usr/bin/node init.js
 
-# Change to the location of cryptonote-node-js-pool
-WorkingDirectory=/path/to/your/cryptonote-nodejs-pool/pool
-
-# Set user and group that will run the pool
-User=pool-user
-Group=pool-user
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
