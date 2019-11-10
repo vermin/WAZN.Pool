@@ -9431,12 +9431,12 @@ textarea.parsley-error:active {
 
 .ct-series-a .ct-point,
 .ct-series-a .ct-line {
-  stroke: #146abb; 
+  stroke: #146abb;
 }
 
 .ct-series-b .ct-point,
 .ct-series-b .ct-line {
-  stroke: #59339d; 
+  stroke: #59339d;
 }
 
 .ct-series-a .ct-area {
@@ -11610,14 +11610,14 @@ textarea.parsley-success:focus {
 .slim-logo {
   margin-bottom: 0;
   letter-spacing: -2px;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
   font-family: "Roboto", "Helvetica Neue", Arial, sans-serif; }
   .slim-logo a {
     color: #1b84e7; }
   @media (min-width: 992px) {
     .slim-logo {
-      font-size: 36px;
+      font-size: 28px;
       margin-right: 60px; } }
 
 .search-box {
@@ -12693,8 +12693,8 @@ textarea.parsley-success:focus {
     height: 200px; }
     @media (min-width: 576px) {
       .dash-headline-item-one .dash-chartist {
-        height: 200px; 
-      } 
+        height: 200px;
+      }
     }
     .dash-headline-item-one .dash-chartist .ct-labels,
     .dash-headline-item-two .dash-chartist .ct-labels {
@@ -12767,7 +12767,7 @@ textarea.parsley-success:focus {
         width: 50%;
         padding: 0;
         padding-top: 20px;
-      } 
+      }
     }
   .dash-headline-item-two h4 {
     color: #343a40;
@@ -40291,7 +40291,7 @@ a.hover-white-8:hover, a.hover-white-8:focus {
 
 .mx-wd-1350 {
   max-width: 1350px; }
-  
+
 .dash-small-info {
   width: 100%;
 }
@@ -40355,10 +40355,10 @@ a.hover-white-8:hover, a.hover-white-8:focus {
 
 #blocksReport .luckBad,
 #blocksReport .orphaned {
-  color: #a60000; 
+  color: #a60000;
 }
 
-#blocksReport .luckGood, 
+#blocksReport .luckGood,
 #blocksReport .unlocked {
   color: #17a600;
 }
@@ -40376,15 +40376,15 @@ a.hover-white-8:hover, a.hover-white-8:focus {
 }
 
 #blockStats .luckGood {
-  color: #5EFF5E; 
+  color: #5EFF5E;
 }
 
 #blockStats .luckBad {
-  color: red;   
+  color: red;
 }
 
 #blockStats .luckMid {
-  color: #FFF500; 
+  color: #FFF500;
 }
 
 .card-separate-text {
@@ -40394,7 +40394,7 @@ a.hover-white-8:hover, a.hover-white-8:focus {
 
 .card-label {
   font-weight: bold;
-  color: #0076A8;
+  color: #339933;
 }
 
 .card-icon {
@@ -40466,7 +40466,7 @@ body {
 
 #poolFooter p {
   width: 100%;
-  text-align: center;  
+  text-align: center;
 }
 
 #page {
@@ -40479,18 +40479,18 @@ body {
 
 .btn-primary {
   color: #333;
-  background-color: #0076A8 !important;
+  background-color: #339933 !important;
 }
 
 .bg-primary-dark {
   background-color: #343a40 !important;
   border: 1px solid #212529 !important;
-} 
+}
 
 .btn-primary-outline {
-  color: #0076A8;
+  color: #339933;
   background-color: rgba(0, 0, 0, 0);
-  border: 1px solid #0076A8 !important;
+  border: 1px solid #339933 !important;
 }
 
 .btn-success-outline {
@@ -40509,7 +40509,7 @@ body {
   border: 1px solid #388a2b !important;
 }
 
-html { 
+html {
   width:100vw;
   overflow-x:hidden;
 }
@@ -40529,11 +40529,11 @@ html {
 
 .slim-logo span {
   color: #868ba1;
-  font-weight: 400;  
+  font-weight: 400;
 }
 
 .slim-logo a {
-  color: #0076A8 !important;
+  color: #339933 !important;
 }
 
 .slim-navbar .nav-link .icon,
@@ -40544,11 +40544,11 @@ html {
 .headline-item-one .statement-link:focus,
 .dash-headline-item-three .item-label,
 .dash-headline-item-two .item-label {
-    color: #0076A8 !important;
+    color: #339933 !important;
 }
 
 .dash-headline-item-one .statement-link {
-  border: 1px solid #0076A8;
+  border: 1px solid #339933;
 }
 
 a, .tx-primary {
@@ -40556,11 +40556,11 @@ a, .tx-primary {
 }
 
 .slim-pagetitle {
-  border-left: 4px solid #0076A8;
+  border-left: 4px solid #339933;
 }
 
 .ct-series-a .ct-area {
-  fill: #0076A8 !important;
+  fill: #339933 !important;
   fill-opacity: .2;
 }
 
@@ -40572,7 +40572,7 @@ a, .tx-primary {
 
 .ct-series-a .ct-point,
 .ct-series-a .ct-line {
-  stroke: #0076A8 !important;
+  stroke: #339933 !important;
 }
 
 .ct-series-b .ct-point,
@@ -40581,7 +40581,6 @@ a, .tx-primary {
 }
 
 .logoText {
-  border-left: 1px solid #555;
   padding-left: 10px;
 }
 
@@ -40598,7 +40597,7 @@ a, .tx-primary {
 
 #blocksChartTitle {
   padding: 10px;
-  color: #0076A8;
+  color: #339933;
 }
 
 .userChart .chart {

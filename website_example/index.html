@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
 
-<!-- Mirrored from ple.optimusblue.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 10 Nov 2019 20:27:27 GMT -->
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
 
-    <link rel="icon" href="ple_32.png" type="image/ico" />
+    <link rel="icon" href="wazn_32.png" type="image/ico" />
     <html prefix="og: http://ogp.me/ns#">
-    <meta property="og:image" content="ple_128.png" />
-    <meta property="og:site_name" content="OptimusBlue - PLE Mining Pool" />
+    <meta property="og:image" content="wazn_128.png" />
+    <meta property="og:site_name" content="WAZN Mining Pool" />
     <meta property="og:type" content="object" />
-    <meta property="og:title" content="PLE Mining Pool" />
+    <meta property="og:title" content="WAZN Mining Pool" />
     <meta property="og:url" content="index.html" />
-    <meta property="og:description" content="PLE Mining pool based in Europe and in full support of decentralization." />
-    <meta name="description" content="PLE Mining pool based in Europe and in full support of decentralization.">    
-    <title>OptimusBlue - Plenteum Mining Pool</title>
+    <meta property="og:description" content="WAZN Mining pool based in Europe and in full support of decentralization." />
+    <meta name="description" content="Official WAZN Mining pool based in Europe and in full support of decentralization.">
+    <title>WAZN Mining Pool</title>
 
     <!-- vendor css -->
     <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -47,17 +46,17 @@
     <script src="js/ResizeSensor.js"></script>
     <script src="js/slim.js"></script>
 </head>
-<body>    
+<body>
     <div class="slim-header">
         <div class="container">
           <div class="slim-header-left">
-            <img src="ple_128.png" width="58" height="58"> 
+            <img src="wazn_128.png" width="36" height="36">
             <div class="logoText">
-                <h2 class="slim-logo"><a href="index-2.html"><span>POOL</span></a></h2>
+                <h2 class="slim-logo"><a href="index-2.html"><span>WAZN POOL</span></a></h2>
             </div>
           </div><!-- slim-header-left -->
           <div class="slim-header-right">
-             <div id="section"><span id="statsUpdated"><span tkey="statsUpdated">Stats Updated</span> &nbsp;<i class="fa fa-bolt"></i></span></div>                
+             <div id="section"><span id="statsUpdated"><span tkey="statsUpdated">Stats Updated</span> &nbsp;<i class="fa fa-bolt"></i></span></div>
              <div id="langSelector">
                  <select id="newLang" class="form-control">
                      <option value="en" selected="selected">English</option>
@@ -68,11 +67,11 @@
                      <option value="ca">Català</option>
                      <option value="ko">한국어</option>
                  </select>
-             </div>        
+             </div>
           </div><!-- header-right -->
         </div><!-- container -->
       </div><!-- slim-header -->
-  
+
       <div class="slim-navbar">
         <div class="container">
           <ul class="nav">
@@ -104,7 +103,7 @@
               <a class="nav-link hot_link" data-page="top10miners.html" href="#top10miners">
                 <i class="icon ion-ios-chatboxes-outline"></i>
                 <span tkey="top10miners">TOP 10</span>
-        
+
               </a>
             </li>
             <li class="nav-item with-sub">
@@ -125,19 +124,19 @@
           </ul>
         </div><!-- container -->
       </div><!-- slim-navbar -->
-  
+
       <div id="page-wrapper">
             <div class="slim-mainpanel" id="page">
                 <p id="loading" class="text-center"><i class="fa fa-circle-o-notch fa-spin"></i></p>
-            </div><!-- slim-mainpanel -->          
+            </div><!-- slim-mainpanel -->
       </div>
-  
+
       <div class="slim-footer" id="poolFooter">
         <div class="container">
-          <p>Copyright 2019 &copy; All Rights Reserved. OptimusBlue - Theme Adapted from Conceal Network</p>
+          <p>Copyright 2019 &copy; All Rights Reserved. WAZN Project - Theme adapted from Conceal Network</p>
         </div><!-- container -->
       </div><!-- slim-footer -->
-  
+
     <!-- Javascript -->
     <script src="config.js"></script>
     <script src="lang/languages.js"></script>
@@ -174,7 +173,7 @@
 
     // Update live informations
     function updateLiveStats(data) {
-        pulseLiveUpdate();   
+        pulseLiveUpdate();
         lastStats = data;
         if (lastStats && lastStats.pool && lastStats.pool.totalMinersPaid.toString() == '-1'){
             lastStats.pool.totalMinersPaid = 0;
@@ -187,26 +186,26 @@
     function updateIndex(){
         updateText('coinSymbol', lastStats.config.symbol);
         updateText('g_networkHashrate', getReadableHashRateString(lastStats.network.difficulty / lastStats.config.coinDifficultyTarget) + '/sec');
-        updateText('g_poolHashrate', getReadableHashRateString(lastStats.pool.hashrate) + '/sec');    
+        updateText('g_poolHashrate', getReadableHashRateString(lastStats.pool.hashrate) + '/sec');
         if (lastStats.miner && lastStats.miner.hashrate){
             updateText('g_userHashrate', getReadableHashRateString(lastStats.miner.hashrate) + '/sec');
         }
         else{
             updateText('g_userHashrate', 'N/A');
-        }    
+        }
         updateText('poolVersion', lastStats.config.version);
     }
 
     // Load live statistics
     function loadLiveStats(reload) {
         var apiURL = api + '/stats';
-        
+
         var address = getCurrentAddress();
         if (address) { apiURL = apiURL + '?address=' + encodeURIComponent(address); }
 
         if (xhrLiveStats) xhrLiveStats.abort();
-        
-        $.get(apiURL, function(data){        
+
+        $.get(apiURL, function(data){
             updateLiveStats(data);
             if (!reload) routePage(fetchLiveStats);
         });
@@ -219,7 +218,7 @@
 
         var address = getCurrentAddress();
         if (address) { apiURL = apiURL + '?address=' + encodeURIComponent(address); }
-        
+
         xhrLiveStats = $.ajax({
             url: apiURL,
             dataType: 'json',
@@ -232,8 +231,8 @@
     }
 
     // Initialize
-    $(function(){        
-        // Add support informations to menu    
+    $(function(){
+        // Add support informations to menu
         if (typeof telegram !== 'undefined' && telegram) {
             $('#menu-content').append('<li><a target="_new" href="'+telegram+'"><i class="fa fa-telegram"></i> <span tkey="telegram">Telegram group</span></a></li>');
         }
@@ -247,12 +246,10 @@
             $('#menu-content').append('<div id="mLangSelector"></div>');
         renderLangSelector();
         }
-        
+
         // Load live statistics for the first time
         loadLiveStats();
     });
     </script>
 </body>
-
-<!-- Mirrored from ple.optimusblue.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 10 Nov 2019 20:27:34 GMT -->
 </html>
