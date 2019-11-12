@@ -1,14 +1,14 @@
 [Unit]
-Description=WAZN Pool Service
+Description=WAZN Pool Mining Service
 After=network.target
 
 [Service]
 User=pool
 Group=pool
-WorkingDirectory=/var/wazn-pool/pool
+WorkingDirectory=/path/to/your/wazn-nodejs-pool/pool
 
 Type=simple
-SyslogIdentifier=wazn-pool
+SyslogIdentifier=wazn-nodejs-pool
 ExecStart=/usr/bin/node init.js
 
 Restart=always

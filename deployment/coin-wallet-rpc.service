@@ -7,7 +7,7 @@ User=pool
 Group=pool
 
 Type=simple
-ExecStart=/usr/local/bin/wazn-wallet-cli --rpc-bind-ip=127.0.0.1 --rpc-bind-port=11787 --wallet=/etc/pool --password=wallet_password
+ExecStart=/path/to/coin/wallet-rpc --rpc-bind-ip=127.0.0.1 --rpc-bind-port=11787 --wallet=/path/to/wallet --password=your.wallet.password!
 
 Restart=always
 

@@ -622,16 +622,16 @@ var api = "http://poolhost:8117";
 var poolHost = "poolhost.com";
 
 /* Number of coin decimals places (override daemon setting if set) */
-"coinDecimalPlaces": 4,
+"coinDecimalPlaces": 6,
 
 /* Contact email address. */
 var email = "support@poolhost.com";
 
 /* Pool Telegram URL. */
-var telegram = "https://t.me/YourPool";
+var telegram = "https://t.me/WAZNPool";
 
 /* Pool Discord URL */
-var discord = "https://discordapp.com/invite/YourPool";
+var discord = "https://discordapp.com/invite/WAZNPool";
 
 /* Market stat display params from https://www.cryptonator.com/widget */
 var marketCurrencies = ["{symbol}-BTC", "{symbol}-USD", "{symbol}-EUR", "{symbol}-CAD"];
