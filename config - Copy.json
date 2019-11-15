@@ -1,5 +1,5 @@
 {
-  "poolHost": "http://95.179.152.61:8117",
+  "poolHost": "https://95.179.152.61:8117",
   "coin": "WAZN",
   "symbol": "WAZN",
   "coinUnits": 1000000,
