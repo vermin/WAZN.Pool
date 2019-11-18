@@ -1,5 +1,5 @@
 [Unit]
-Description=WAZN Pool Mining Service
+Description=WAZN POOL
 After=network.target
 
 [Service]

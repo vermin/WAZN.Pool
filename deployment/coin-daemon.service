@@ -1,5 +1,5 @@
 [Unit]
-Description=WAZN Pool Daemon
+Description=WAZN CORE
 After=network.target
 
 [Service]

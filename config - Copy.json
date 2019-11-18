@@ -5,10 +5,10 @@
   "coinUnits": 1000000,
   "coinDecimalPlaces": 6,
   "coinDifficultyTarget": 120,
-  "daemonType": "bytecoin",
+  "daemonType": "cryptonote",
   "cnAlgorithm": "cryptonight_pico",
-  "cnVariant": 2,
-  "cnBlobType": 2,
+  "cnVariant": 0,
+  "cnBlobType": 0,
 
   "logging": {
     "files": {
