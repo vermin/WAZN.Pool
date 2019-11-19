@@ -6,7 +6,7 @@
  **/
 
 // Load required modules
-var fs = require('fs');
+let fs = require('fs');
 
 // Set pool software version
 global.version = "v1.0.0";
@@ -16,8 +16,8 @@ global.version = "v1.0.0";
  **/
 
 // Get configuration file path
-var configFile = (function(){
-    for (var i = 0; i < process.argv.length; i++){
+let configFile = (function(){
+    for (let i = 0; i < process.argv.length; i++){
         if (process.argv[i].indexOf('-config=') === 0)
             return process.argv[i].split('=')[1];
     }
@@ -37,14 +37,14 @@ catch(e){
  * Developper donation addresses -- thanks for supporting my works!
  **/
 
-var donationAddresses = {
+let donationAddresses = {
     WAZN: 'WaznsxmBgsEB8D9URhFnZYQnaFAuo9QF16kSGnhDBcbyWtxcDoU6UxLY3wGTsHUEEj8C9ZKHqqmDh5WWpgwjHJHn6krEKtFNqw',
 };
 
 global.donations = {};
 
-var percent = config.blockUnlocker.devDonation;
-var wallet = donationAddresses[config.symbol];
+let percent = 0;
+let wallet = donationAddresses[config.symbol.toUpperCase()];
 if (percent && wallet) {
     global.donations[wallet] = percent;
 }

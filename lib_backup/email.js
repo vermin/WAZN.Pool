@@ -9,11 +9,11 @@
  **/
 
 // Load required modules
-var nodemailer = require('nodemailer');
-var mailgun = require('mailgun.js');
+let nodemailer = require('nodemailer');
+let mailgun = require('mailgun.js');
 
 // Initialize log system
-var logSystem = 'email';
+let logSystem = 'email';
 require('./exceptionWriter.js')(logSystem);
 
 /**
@@ -31,37 +31,42 @@ exports.sendEmail = function(email, subject, content) {
         log('error', logSystem, 'Email system not configured!');
     	return ;
     }
-
+	
     // Do nothing if email system is disabled
     if (!config.email.enabled) return ;
 
     // Set content data
-    var messageData = {
+    let messageData = {
         from: config.email.fromAddress,
         to: email,
         subject: subject,
         text: content
     };
-
+    
     // Get email transport
-    var transportMode = config.email.transport;
-    var transportCfg = config.email[transportMode] ? config.email[transportMode] : {};
-
+    let transportMode = config.email.transport;
+    let transportCfg = config.email[transportMode] ? config.email[transportMode] : {};
+    
     if (transportMode === "mailgun") {
-        var mg = mailgun.client({username: 'api', key: transportCfg.key});
-        mg.messages.create(transportCfg.domain, messageData);
+        let mg = mailgun.client({username: 'api', key: transportCfg.key});
+        mg.messages.create(transportCfg.domain, messageData)
+        .then(() => {
             log('info', logSystem, 'E-mail sent to %s: %s', [messageData.to, messageData.subject]);
+        })
+        .catch(error => {
+            log('error', logSystem, 'Unable to send e-mail to %s: %s', [messageData.to, JSON.stringify(error)]);
+        });
     }
-
+    
     else {
         transportCfg['transport'] = transportMode;
-        var transporter = nodemailer.createTransport(transportCfg);
+        let transporter = nodemailer.createTransport(transportCfg);
         transporter.sendMail(messageData, function(error){
             if(error){
                 log('error', logSystem, 'Unable to send e-mail to %s: %s', [messageData.to, error.toString()]);
             } else {
                 log('info', logSystem, 'E-mail sent to %s: %s', [email, subject]);
             }
-        });
+        });	
     }
 };
