@@ -114,6 +114,16 @@ sudo add-apt-repository ppa:chris-lea/redis-server
 sudo apt-get update
 sudo apt-get install redis-server
  ```
+ Dont forget to tune redis-server:
+ ```
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+echo 1024 > /proc/sys/net/core/somaxconn
+ ```
+ Add this lines to your /etc/rc.local and make it executable
+ ```
+ chmod +x /etc/rc.local
+ ```
+
 * libssl required for the node-multi-hashing module
   * For Ubuntu: `sudo apt-get install libssl-dev`
 
@@ -142,7 +152,7 @@ sudo su - your-user
 Clone the repository and run `npm update` for all the dependencies to be installed:
 
 ```bash
-git clone https://github.com/vermin/vermin-nodejs-pool.git pool
+git clone https://github.com/vermin/wazn-nodejs-pool.git pool
 cd pool
 
 npm update
