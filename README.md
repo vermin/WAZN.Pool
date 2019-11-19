@@ -103,9 +103,9 @@ Usage
 * Coin daemon(s) (find the coin's repo and build latest version from source)
 * [Node.js](http://nodejs.org/) v4.0+
   * For Ubuntu:
- ```
-  curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash
-  sudo apt-get install -y nodejs
+```
+curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash
+sudo apt-get install -y nodejs
 ```
 * [Redis](http://redis.io/) key-value store v2.6+
   * For Ubuntu:
@@ -577,12 +577,13 @@ The file `config.json` is used by default but a file can be specified using the 
 node init.js -config=config_backup.json
 ```
 
-This software contains four distinct modules:
+This software contains six distinct modules:
 * `pool` - Which opens ports for miners to connect and processes shares
 * `api` - Used by the website to display network, pool and miners' data
 * `unlocker` - Processes block candidates and increases miners' balances when blocks are unlocked
 * `payments` - Sends out payments to miners according to their balances stored in redis
-
+* `chartsDataCollector` - Processes miners and workers hashrate stats and charts
+* `telegramBot` - Processes telegram bot commands
 
 By default, running the `init.js` script will start up all four modules. You can optionally have the script start
 only start a specific module by using the `-module=name` command argument, for example:
@@ -594,12 +595,12 @@ node init.js -module=api
 [Example screenshot](http://i.imgur.com/SEgrI3b.png) of running the pool in single module mode with tmux.
 
 To keep your pool up, on operating system with systemd, you can create add your pool software as a service.  
-Use this [example](https://github.com/dvandal/cryptonote-nodejs-pool/blob/master/deployment/cryptonote-nodejs-pool.service) to create the systemd service `/lib/systemd/system/cryptonote-nodejs-pool.service`
+Use this [example](https://github.com/dvandal/cryptonote-nodejs-pool/blob/master/deployment/cryptonote-nodejs-pool.service) to create the systemd service `/lib/systemd/system/wazn-nodejs-pool.service`
 Then enable and start the service with the following commands :
 
 ```
-sudo systemctl enable cryptonote-nodejs-pool.service
-sudo systemctl start cryptonote-nodejs-pool.service
+sudo systemctl enable wazn-nodejs-pool.service
+sudo systemctl start wazn-nodejs-pool.service
 ```
 
 #### 4) Host the front-end
