@@ -127,11 +127,11 @@
   },
   "daemon": {
     "host": "127.0.0.1",
-    "port": 11786
+    "port": 11787
   },
   "wallet": {
     "host": "127.0.0.1",
-    "port": 11787,
+    "port": 11789,
     "password": "<replace with rpc password>"
   },
   "redis": {
