@@ -101,12 +101,16 @@ Usage
 
 #### Requirements
 * Coin daemon(s) (find the coin's repo and build latest version from source)
-* [Node.js](http://nodejs.org/) v4.0+
+  * [List of Cryptonote coins](https://github.com/dvandal/cryptonote-nodejs-pool/wiki/Cryptonote-Coins)
+* [Node.js](http://nodejs.org/) v11.0+
   * For Ubuntu:
 ```
 curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash
 sudo apt-get install -y nodejs
 ```
+  * Or use NVM(https://github.com/creationix/nvm) for debian/ubuntu.
+
+
 * [Redis](http://redis.io/) key-value store v2.6+
   * For Ubuntu:
 ```
@@ -217,7 +221,8 @@ Explanation for each field:
         "colors": true
     }
 },
-
+/*Which Hashing Package to use: cryptonight-hashing=false, multi-hashing=true*/
+"hashingUtil":false,
 /* Modular Pool Server */
 "poolServer": {
     "enabled": true,
@@ -299,7 +304,8 @@ Explanation for each field:
 
     /* Set payment ID on miner client side by passing <address>.<paymentID> */
     "paymentId": {
-        "addressSeparator": "." // Character separator between <address> and <paymentID>
+        "addressSeparator": ".", // Character separator between <address> and <paymentID>
+        "validation": true // Refuse login if non alphanumeric characters in <paymentID>
     },
 
     /* Feature to trust share difficulties from miners which can
@@ -390,7 +396,8 @@ Explanation for each field:
 /* Wallet daemon connection details (default port is 18980) */
 "wallet": {
     "host": "127.0.0.1",
-    "port": 18982
+    "port": 18982,
+    "password": "--rpc-password"
 },
 
 /* Redis connection info (default port is 6379) */
@@ -502,7 +509,7 @@ Explanation for each field:
 
 /* Prices settings for market and price charts */
 "prices": {
-    "source": "cryptonator", // Exchange (supported values: cryptonator, altex, crex24, cryptopia, stocks.exchange, tradeogre)
+    "source": "cryptonator", // Exchange (supported values: cryptonator, altex, crex24, cryptopia, stocks.exchange, tradeogre, maplechange)
     "currency": "USD" // Default currency
 },
 
@@ -554,6 +561,12 @@ Explanation for each field:
             "stepInterval": 1800,
             "maximumPeriod": 86400
         },
+        "worker_hashrate": {
+            "enabled": true,
+            "updateInterval": 60,
+            "stepInterval": 60,
+            "maximumPeriod": 86400
+        },
         "payments": { // Payment chart uses all user payments data stored in DB
             "enabled": true
         }
@@ -595,7 +608,7 @@ node init.js -module=api
 [Example screenshot](http://i.imgur.com/SEgrI3b.png) of running the pool in single module mode with tmux.
 
 To keep your pool up, on operating system with systemd, you can create add your pool software as a service.  
-Use this [example](https://github.com/dvandal/cryptonote-nodejs-pool/blob/master/deployment/cryptonote-nodejs-pool.service) to create the systemd service `/lib/systemd/system/wazn-nodejs-pool.service`
+Use this [example](https://github.com/muscleman/cryptonote-nodejs-pool/blob/master/deployment/cryptonote-nodejs-pool.service) to create the systemd service `/lib/systemd/system/cryptonote-nodejs-pool.service`
 Then enable and start the service with the following commands :
 
 ```
@@ -629,7 +642,10 @@ var email = "support@poolhost.com";
 var telegram = "https://t.me/WAZNPool";
 
 /* Pool Discord URL */
-var discord = "https://discordapp.com/invite/WAZNPool";
+var discord = "https://discord.gg/pTDr4hr";
+
+/*Pool Facebook URL */
+var facebook = "https://www.facebook.com/wazn.io";
 
 /* Market stat display params from https://www.cryptonator.com/widget */
 var marketCurrencies = ["{symbol}-BTC", "{symbol}-USD", "{symbol}-EUR", "{symbol}-CAD"];

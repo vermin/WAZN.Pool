@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 /**
  * Cryptonite Node.JS Pool
  * https://github.com/dvandal/cryptonote-nodejs-pool
@@ -22,12 +23,23 @@ var redis = require('redis');
 var redisDB = (config.redis.db && config.redis.db > 0) ? config.redis.db : 0;
 global.redisClient = redis.createClient(config.redis.port, config.redis.host, { db: redisDB, auth_pass: config.redis.auth });
 
+if (typeof config.childPools !== 'undefined')
+    config.childPools = config.childPools.filter(pool => pool.enabled);
+else
+    config.childPools = [];
+
 // Load pool modules
 if (cluster.isWorker){
     switch(process.env.workerType){
         case 'pool':
             require('./lib/pool.js');
             break;
+        case 'daemon':
+            require('./lib/daemon.js');
+            break;
+	case 'childDaemon':
+	    require('./lib/childDaemon.js');
+	    break;
         case 'blockUnlocker':
             require('./lib/blockUnlocker.js');
             break;
@@ -39,6 +51,9 @@ if (cluster.isWorker){
             break;
         case 'chartsDataCollector':
             require('./lib/chartsDataCollector.js');
+            break;
+        case 'telegramBot':
+            require('./lib/telegramBot.js');
             break;
     }
     return;
@@ -53,7 +68,7 @@ log('info', logSystem, 'Starting Cryptonote Node.JS pool version %s', [version])
 
 // Run a single module ?
 var singleModule = (function(){
-    var validModules = ['pool', 'api', 'unlocker', 'payments', 'chartsDataCollector'];
+    var validModules = ['pool', 'api', 'unlocker', 'payments', 'chartsDataCollector', 'telegramBot'];
 
     for (var i = 0; i < process.argv.length; i++){
         if (process.argv[i].indexOf('-module=') === 0){
@@ -76,6 +91,9 @@ var singleModule = (function(){
             log('info', logSystem, 'Running in single module mode: %s', [singleModule]);
 
             switch(singleModule){
+                case 'daemon':
+                    spawnDaemon();
+                    break;
                 case 'pool':
                     spawnPoolWorkers();
                     break;
@@ -91,10 +109,16 @@ var singleModule = (function(){
                 case 'chartsDataCollector':
                     spawnChartsDataCollector();
                     break;
+                case 'telegramBot':
+                    spawnTelegramBot();
+                    break;
             }
         }
         else{
             spawnPoolWorkers();
+            spawnDaemon();
+	    if (config.poolServer.mergedMining)
+   	        spawnChildDaemons();
             spawnBlockUnlocker();
             spawnPaymentProcessor();
             spawnApi();
@@ -148,7 +172,6 @@ function spawnPoolWorkers(){
         log('error', logSystem, 'Pool server enabled but no ports specified');
         return;
     }
-
     var numForks = (function(){
         if (!config.poolServer.clusterForks)
             return 1;
@@ -196,6 +219,92 @@ function spawnPoolWorkers(){
             log('info', logSystem, 'Pool spawned on %d thread(s)', [numForks]);
         }
     }, 10);
+}
+
+/**
+ * Spawn pool workers module
+ **/
+function spawnChildDaemons(){
+    if (!config.poolServer || !config.poolServer.enabled || !config.poolServer.ports || config.poolServer.ports.length === 0) return;
+
+    if (config.poolServer.ports.length === 0){
+        log('error', logSystem, 'Pool server enabled but no ports specified');
+        return;
+    }
+
+    var numForks = (function(){
+        if (!config.poolServer.mergedMining)
+            return 0;
+        if (typeof config.childPools !== 'undefined') {
+	    return config.childPools.length;
+	}
+        return 0;
+    })();
+    var daemonWorkers = {};
+
+    var createDaemonWorker = function(poolId){
+        var worker = cluster.fork({
+            workerType: 'childDaemon',
+            poolId: poolId
+        });
+        worker.poolId = poolId;
+        worker.type = 'childDaemon';
+        daemonWorkers[poolId] = worker;
+        worker.on('exit', function(code, signal){
+            log('error', logSystem, 'Child Daemon fork %s died, spawning replacement worker...', [poolId]);
+            setTimeout(function(){
+                createDaemonWorker(poolId);
+            }, 2000);
+        }).on('message', function(msg){
+            switch(msg.type){
+                case 'ChildBlockTemplate':
+                    Object.keys(cluster.workers).forEach(function(id) {
+                        if (cluster.workers[id].type === 'pool'){
+                            cluster.workers[id].send({type: 'ChildBlockTemplate', block: msg.block, poolIndex: msg.poolIndex});
+                        }
+                    });
+                    break;
+                }
+        });
+    };
+
+    var i = 0;
+    var spawnInterval = setInterval(function(){
+        createDaemonWorker(i.toString());
+	i++;
+        if (i === numForks){
+            clearInterval(spawnInterval);
+            log('info', logSystem, 'Child Daemon spawned on %d thread(s)', [numForks]);
+        }
+    }, 10);
+}
+
+
+/**
+ * Spawn daemon module
+ **/
+function spawnDaemon(){
+    if (!config.poolServer || !config.poolServer.enabled || !config.poolServer.ports || config.poolServer.ports.length === 0) return;
+
+    var worker = cluster.fork({
+        workerType: 'daemon'
+    });
+    worker.on('exit', function(code, signal){
+        log('error', logSystem, 'Daemon died, spawning replacement...');
+        setTimeout(function(){
+            spawnDaemon();
+        }, 10);
+    }).on('message', function(msg){
+        switch(msg.type){
+            case 'BlockTemplate':
+                Object.keys(cluster.workers).forEach(function(id) {
+                    if (cluster.workers[id].type === 'pool'){
+                        cluster.workers[id].send({type: 'BlockTemplate', block: msg.block});
+                    }
+                });
+                break;
+        }
+    });
 }
 
 /**
@@ -262,6 +371,23 @@ function spawnChartsDataCollector(){
         log('error', logSystem, 'chartsDataCollector died, spawning replacement...');
         setTimeout(function(){
             spawnChartsDataCollector();
+        }, 2000);
+    });
+}
+
+/**
+ * Spawn telegram bot module
+ **/
+function spawnTelegramBot(){
+    if (!config.telegram || !config.telegram.enabled || !config.telegram.token) return;
+
+    var worker = cluster.fork({
+        workerType: 'telegramBot'
+    });
+    worker.on('exit', function(code, signal){
+        log('error', logSystem, 'telegramBot died, spawning replacement...');
+        setTimeout(function(){
+            spawnTelegramBot();
         }, 2000);
     });
 }
