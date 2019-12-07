@@ -34,22 +34,27 @@
         "ports": [
             {
                 "port": 3333,
-                "difficulty": 50000,
-                "desc": "Economy CPU or GPU"
+                "difficulty": 5000,
+                "desc": "Low end hardware"
             },
             {
                 "port": 4444,
-                "difficulty": 200000,
-                "desc": "Gaming CPU or GPU"
+                "difficulty": 15000,
+                "desc": "Mid range hardware"
             },
             {
                 "port": 5555,
+                "difficulty": 25000,
+                "desc": "High end hardware"
+            },
+            {
+                "port": 7777,
                 "difficulty": 500000,
-                "desc": "GPU Mining Rig"
+                "desc": "Cloud-mining / NiceHash"
             },
             {
                 "port": 9099,
-                "difficulty": 1000,
+                "difficulty": 25000,
                 "desc": "Hidden port",
                 "hidden": true
             }
@@ -78,7 +83,7 @@
         },
         "banning": {
             "enabled": true,
-            "time": 60,
+            "time": 600,
             "invalidPercent": 25,
             "checkThreshold": 30
         },
@@ -89,53 +94,56 @@
             "lastBlockCheckRate": 1
          }
     },
+
     "payments": {
         "enabled": true,
         "interval": 7200,
         "maxAddresses": 50,
-        "mixin": 5,
+        "mixin": 8,
         "priority": 0,
-        "transferFee": 50000,
-        "dynamicTransferFee": true,
+        "transferFee": 40000,
         "minerPayFee" : true,
         "minPayment": 10000000,
-        "maxPayment": null,
-        "maxTransactionAmount": 1000000000,
-        "denomination": 100000
+        "maxTransactionAmount": 10000000000,
+        "denomination": 1000000
     },
+
     "blockUnlocker": {
         "enabled": true,
         "interval": 30,
         "depth": 60,
-        "poolFee": 0.2,
+        "poolFee": 0.0,
         "devDonation": 0.0,
         "networkFee": 0.0
     },
+
     "api": {
         "enabled": true,
-        "hashrateWindow": 300,
-        "updateInterval": 10,
+        "hashrateWindow": 600,
+        "updateInterval": 5,
         "bindIp": "0.0.0.0",
         "port": 8117,
         "blocks": 30,
         "payments": 30,
-        "host": "api",
-        "password": "addpassword",
+        "password": "addapipass",
         "ssl": false,
         "sslPort": 8119,
         "sslCert": "./cert.pem",
         "sslKey": "./privkey.pem",
         "sslCA": "./chain.pem",
-        "trustProxyIP": false
+        "trustProxyIP": true
     },
+
     "daemon": {
         "host": "127.0.0.1",
         "port": 11787
     },
+
     "wallet": {
         "host": "127.0.0.1",
         "port": 11789
     },
+
     "redis": {
         "host": "127.0.0.1",
         "port": 6379,
@@ -143,6 +151,7 @@
         "db": 0,
         "cleanupInterval": 15
     },
+
     "notifications": {
         "emailTemplate": "email_templates/default.txt",
         "emailSubject": {
@@ -175,6 +184,7 @@
             "payment": "A payment of _%AMOUNT%_ has been sent."
         }
     },
+
     "email": {
         "enabled": false,
         "fromAddress": "your@email.com",
@@ -199,6 +209,7 @@
             "domain": "mg.yourdomain"
         }
     },
+
     "telegram": {
         "enabled": false,
         "botName": "",
@@ -226,6 +237,7 @@
             "rpcMethod": "getbalance"
         }
     },
+
     "prices": {
         "source": "tradeogre",
         "currency": "USD"

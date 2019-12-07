@@ -52,8 +52,8 @@ var logSystem = 'master';
 require('./lib/exceptionWriter.js')(logSystem);
 
 // Pool informations
-log('info', logSystem, 'Starting Cryptonote Node.JS pool version %s', [version]);
- 
+log('info', logSystem, 'Starting WAZN Node.JS pool version %s', [version]);
+
 // Run a single module ?
 var singleModule = (function(){
     var validModules = ['pool', 'api', 'unlocker', 'payments', 'chartsDataCollector', 'telegramBot'];
