@@ -1,5 +1,5 @@
 [Unit]
-Description=WAZN RPC
+Description=Wallet RPC Daemon
 After=network.target
 
 [Service]
