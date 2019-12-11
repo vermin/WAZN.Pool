@@ -1,5 +1,4 @@
-/* jshint esversion: 6 */
-/**
+ /**
  * Cryptonite Node.JS Pool
  * https://github.com/dvandal/cryptonote-nodejs-pool
  *
@@ -24,7 +23,7 @@ var redisDB = (config.redis.db && config.redis.db > 0) ? config.redis.db : 0;
 global.redisClient = redis.createClient(config.redis.port, config.redis.host, { db: redisDB, auth_pass: config.redis.auth });
 
 if ((typeof config.poolServer.mergedMining !== 'undefined' && config.poolServer.mergedMining) && typeof config.childPools !== 'undefined')
-    config.childPools = config.childPools.filter(pool => pool.enabled);
+    config.childPools = config.childPools.filter(pool => pool.enabled)
 else
     config.childPools = [];
 // Load pool modules
@@ -34,11 +33,11 @@ if (cluster.isWorker){
             require('./lib/pool.js');
             break;
         case 'daemon':
-            require('./lib/daemon.js');
-            break;
-        case 'childDaemon':
-            require('./lib/childDaemon.js');
-            break;
+            require('./lib/daemon.js')
+            break
+	case 'childDaemon':
+	    require('./lib/childDaemon.js')
+	    break
         case 'blockUnlocker':
             require('./lib/blockUnlocker.js');
             break;
@@ -58,13 +57,17 @@ if (cluster.isWorker){
     return;
 }
 
+// Developer donations
+if (devFee < 0.2)
+       log('info', logSystem, 'Developer donation \(devDonation\) is set to %d\%, Please consider raising it to 0.2\% or higher !!!', [devFee]);
+
 // Initialize log system
 var logSystem = 'master';
 require('./lib/exceptionWriter.js')(logSystem);
 
 // Pool informations
-log('info', logSystem, 'Starting WAZN Node.JS pool version %s', [version]);
-
+log('info', logSystem, 'Starting Cryptonote Node.JS pool version %s', [version]);
+ 
 // Run a single module ?
 var singleModule = (function(){
     var validModules = ['pool', 'api', 'unlocker', 'payments', 'chartsDataCollector', 'telegramBot'];
@@ -91,8 +94,8 @@ var singleModule = (function(){
 
             switch(singleModule){
                 case 'daemon':
-                    spawnDaemon();
-                    break;
+                    spawnDaemon()
+                    break
                 case 'pool':
                     spawnPoolWorkers();
                     break;
@@ -171,8 +174,15 @@ function spawnPoolWorkers(){
         log('error', logSystem, 'Pool server enabled but no ports specified');
         return;
     }
-    let numForks = config.childPools.length;
-    if (numForks === 0) return;
+    var numForks = (function(){
+        if (!config.poolServer.clusterForks)
+            return 1;
+        if (config.poolServer.clusterForks === 'auto')
+            return os.cpus().length;
+        if (isNaN(config.poolServer.clusterForks))
+            return 1;
+        return config.poolServer.clusterForks;
+    })();
     var poolWorkers = {};
 
     var createPoolWorker = function(forkId){
@@ -227,7 +237,7 @@ function spawnChildDaemons(){
         if (!config.poolServer.mergedMining)
             return 0;
         if (typeof config.childPools !== 'undefined') {
-	    return config.childPools.length;
+	    return config.childPools.length
 	}
         return 0;
     })();
@@ -261,8 +271,8 @@ function spawnChildDaemons(){
 
     var i = 0;
     var spawnInterval = setInterval(function(){
-        createDaemonWorker(i.toString());
-	i++;
+        createDaemonWorker(i.toString())
+	i++
         if (i === numForks){
             clearInterval(spawnInterval);
             log('info', logSystem, 'Child Daemon spawned on %d thread(s)', [numForks]);

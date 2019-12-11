@@ -1,12 +1,12 @@
 {
-    "name": "wazn-nodejs-pool",
-    "version": "1.0.0",
+    "name": "cryptonote-nodejs-pool",
+    "version": "1.4.0",
     "license": "GPL-2.0",
     "Original author": "Daniel Vandal",
-    "Maintained by": "vermin",
+    "Maintained by": "Musclesonvacation",
     "repository": {
         "type": "git",
-        "url": "https://github.com/vermin/wazn-nodejs-pool.git"
+        "url": "https://github.com/muscleman/cryptonote-nodejs-pool.git"
     },
     "dependencies": {
         "async": "1",

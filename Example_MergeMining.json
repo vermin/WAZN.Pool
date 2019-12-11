@@ -1,17 +1,17 @@
 {
-    "poolHost": "pool.wazn.io",
+    "poolHost": "your.pool.host",
 
-    "coin": "WAZN",
-    "symbol": "WAZN",
-    "coinUnits": 1000000,
-    "coinDecimalPlaces": 6,
+    "coin": "Arqma",
+    "symbol": "ARQ",
+    "coinUnits": 1000000000,
+    "coinDecimalPlaces": 9,
     "coinDifficultyTarget": 120,
-    "blockchainExplorer": "http://explorer.wazn.io/block/{id}",
-    "transactionExplorer": "http://explorer.wazn.io/tx/{id}",
+    "blockchainExplorer": "http://blockexplorer.arqma.com/block/{id}",
+    "transactionExplorer": "http://blockexplorer.arqma.com/tx/{id}",
 
     "daemonType": "default",
-    "cnAlgorithm": "cryptonight_upx",
-    "cnVariant": 1,
+    "cnAlgorithm": "cryptonight_pico",
+    "cnVariant": 2,
     "cnBlobType": 0,
 
     "logging": {
@@ -116,7 +116,7 @@
                      "api": "https://your.pool.host/apiMerged7",
                      "enabled": true
                     }
-    ],
+    ],  
     "poolServer": {
         "enabled": true,
         "mergedMining": true,
@@ -393,3 +393,4 @@
         }
     }
 }
+      
