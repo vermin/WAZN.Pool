@@ -5,15 +5,15 @@ After=network.target
 [Service]
 Type=simple
 Restart=always
-SyslogIdentifier=cryptonote-nodejs-pool
+SyslogIdentifier=wazn-nodejs-pool
 ExecStart=/usr/bin/node init.js
 
-# Change to the location of cryptonote-node-js-pool
-WorkingDirectory=/path/to/your/cryptonote-nodejs-pool/pool
+# Change to the location of wazn-node-js-pool
+WorkingDirectory=/path/to/your/wazn-nodejs-pool/pool
 
 # Set user and group that will run the pool
-User=pool-user
-Group=pool-user
+User=pool
+Group=pool
 
 [Install]
 WantedBy=multi-user.target

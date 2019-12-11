@@ -13,6 +13,7 @@ RUN npm update
 
 RUN mkdir -p /config
 
+EXPOSE 8119
 EXPOSE 8117
 EXPOSE 3333
 EXPOSE 4444

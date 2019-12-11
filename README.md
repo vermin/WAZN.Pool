@@ -21,8 +21,6 @@ High performance Node.js (with native C addons) mining pool for CryptoNote based
   * [Upgrading](#upgrading)
 * [JSON-RPC Commands from CLI](#json-rpc-commands-from-cli)
 * [Monitoring Your Pool](#monitoring-your-pool)
-* [Donations](#donations)
-* [Credits](#credits)
 * [License](#license)
 
 
@@ -96,7 +94,8 @@ Features
 
 #### Pools Using This Software
 
-* https://pool.wazn.io
+* http://pool.wazn.io
+* http://wazn.spookypool.nl
 
 Usage
 ===
@@ -157,7 +156,7 @@ sudo su - your-user
 Clone the repository and run `npm update` for all the dependencies to be installed:
 
 ```bash
-git clone https://github.com/vermin/wazn-nodejs-pool.git pool
+git clone https://github.com/project-wazn/wazn-nodejs-pool.git pool
 cd pool
 
 npm update
@@ -609,7 +608,7 @@ node init.js -module=api
 [Example screenshot](http://i.imgur.com/SEgrI3b.png) of running the pool in single module mode with tmux.
 
 To keep your pool up, on operating system with systemd, you can create add your pool software as a service.  
-Use this [example](https://github.com/dvandal/cryptonote-nodejs-pool/blob/master/deployment/cryptonote-nodejs-pool.service) to create the systemd service `/lib/systemd/system/cryptonote-nodejs-pool.service`
+Use this [example](https://github.com/vermin/wazn-nodejs-pool/blob/custom/deployment/wazn-nodejs-pool.service) to create the systemd service `/lib/systemd/system/wazn-nodejs-pool.service`
 Then enable and start the service with the following commands :
 
 ```
@@ -643,7 +642,7 @@ var email = "support@poolhost.com";
 var telegram = "https://t.me/WAZNPool";
 
 /* Pool Discord URL */
-var discord = "https://discord.gg/pTDr4hr";
+var discord = "https://discord.gg/ZmBra64";
 
 /*Pool Facebook URL */
 var facebook = "https://www.facebook.com/wazn.io";
