@@ -127,10 +127,10 @@ echo 1024 > /proc/sys/net/core/somaxconn
  chmod +x /etc/rc.local
  ```
 
-* libssl required for the **wazn-hashing** module
+* libssl required for the **waznhashing** module
   * For Ubuntu: `sudo apt-get install libssl-dev`
 
-* Boost is required for the **wazn-utilities** module
+* Boost is required for the **waznutilities** module
   * For Ubuntu: `sudo apt-get install libboost-all-dev`
 
 
@@ -220,7 +220,7 @@ Explanation for each field:
         "colors": true
     }
 },
-/*Which Hashing Package to use: wazn-hashing=false, multi-hashing=true*/
+/*Which Hashing Package to use: waznhashing=false, multi-hashing=true*/
 "hashingUtil":false,
 /* Modular Pool Server */
 "poolServer": {
