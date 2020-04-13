@@ -1,20 +1,21 @@
 {
-    "name": "cryptonote-nodejs-pool",
-    "version": "1.4.0",
+    "name": "wazn-nodejs-pool",
+    "version": "1.9.0",
+    "description": "High performance Node.js mining pool",
+    "author": "Multiple",
+    "maintained by": "vermin",
     "license": "GPL-2.0",
-    "Original author": "Daniel Vandal",
-    "Maintained by": "Musclesonvacation",
     "repository": {
         "type": "git",
-        "url": "https://github.com/muscleman/cryptonote-nodejs-pool.git"
+        "url": "https://github.com/project-wazn/wazn-nodejs-pool.git"
     },
     "dependencies": {
         "async": "1",
         "base58-native": "*",
         "bignum": "*",
         "cli-color": "*",
-        "cryptoforknote-util": "git://github.com/MoneroOcean/node-cryptoforknote-util.git",
-        "cryptonight-hashing": "git://github.com/MoneroOcean/node-cryptonight-hashing.git",
+        "wazn-utilities": "git://github.com/project-wazn/wazn-node-utilities.git",
+        "wazn-hashing": "git://github.com/project-wazn/wazn-node-hashing.git",
         "dateformat": "*",
         "mailgun.js": "*",
         "node-telegram-bot-api": "*",
@@ -25,6 +26,6 @@
         "time-ago": "*"
     },
     "engines": {
-        "node": ">=8.11.3"
+        "node": ">=10.20.0"
     }
 }

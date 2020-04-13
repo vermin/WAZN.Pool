@@ -21,8 +21,6 @@ High performance Node.js (with native C addons) mining pool for CryptoNote based
   * [Upgrading](#upgrading)
 * [JSON-RPC Commands from CLI](#json-rpc-commands-from-cli)
 * [Monitoring Your Pool](#monitoring-your-pool)
-* [Donations](#donations)
-* [Credits](#credits)
 * [License](#license)
 
 
@@ -96,20 +94,20 @@ Features
 
 #### Pools Using This Software
 
-* https://pool.wazn.io
+* http://pool.wazn.io
 
 Usage
 ===
 
 #### Requirements
 * Coin daemon(s) (find the coin's repo and build latest version from source)
-* [Node.js](http://nodejs.org/) v11.0+
+* [Node.js](http://nodejs.org/) v11.0
   * For Ubuntu:
 ```
 curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash
 sudo apt-get install -y nodejs
 ```
-  * Or use NVM(https://github.com/creationix/nvm) for debian/ubuntu.
+  * Or use NVM(https://github.com/creationix/nvm) for on Ubuntu or other Debian.
 
 
 * [Redis](http://redis.io/) key-value store v2.6+
@@ -129,10 +127,10 @@ echo 1024 > /proc/sys/net/core/somaxconn
  chmod +x /etc/rc.local
  ```
 
-* libssl required for the node-multi-hashing module
+* libssl required for the **wazn-hashing** module
   * For Ubuntu: `sudo apt-get install libssl-dev`
 
-* Boost is required for the cryptoforknote-util module
+* Boost is required for the **wazn-utilities** module
   * For Ubuntu: `sudo apt-get install libboost-all-dev`
 
 
@@ -157,7 +155,7 @@ sudo su - your-user
 Clone the repository and run `npm update` for all the dependencies to be installed:
 
 ```bash
-git clone https://github.com/vermin/wazn-nodejs-pool.git pool
+git clone https://github.com/project-wazn/wazn-nodejs-pool.git pool
 cd pool
 
 npm update
@@ -165,7 +163,7 @@ npm update
 
 #### 2) Configuration
 
-Copy the `config_examples/COIN.json` file of your choice to `config.json` then overview each options and change any to match your preferred setup.
+Rename the `example_config.json` file to `config.json`, overview each options and change any to match your preferred setup.
 
 Explanation for each field:
 ```javascript
@@ -195,7 +193,7 @@ Explanation for each field:
    Supported variants for "cryptonight": 0 (Original), 1 (Monero v7), 3 (Stellite / XTL)
    Supported variants for "cryptonight_light": 0 (Original), 1 (Aeon v7), 2 (IPBC)
    Supported blob types: 0 (Cryptonote), 1 (Forknote v1), 2 (Forknote v2), 3 (Cryptonote v2 / Masari) */
-"cnAlgorithm": "cryptonight",
+"cnAlgorithm": "wazn",
 "cnVariant": 1,
 "cnBlobType": 0,
 
@@ -222,7 +220,7 @@ Explanation for each field:
         "colors": true
     }
 },
-/*Which Hashing Package to use: cryptonight-hashing=false, multi-hashing=true*/
+/*Which Hashing Package to use: wazn-hashing=false, multi-hashing=true*/
 "hashingUtil":false,
 /* Modular Pool Server */
 "poolServer": {
@@ -588,7 +586,7 @@ node init.js
 The file `config.json` is used by default but a file can be specified using the `-config=file` command argument, for example:
 
 ```bash
-node init.js -config=config_backup.json
+node init.js -config=config.json
 ```
 
 This software contains six distinct modules:
@@ -609,7 +607,7 @@ node init.js -module=api
 [Example screenshot](http://i.imgur.com/SEgrI3b.png) of running the pool in single module mode with tmux.
 
 To keep your pool up, on operating system with systemd, you can create add your pool software as a service.  
-Use this [example](https://github.com/dvandal/cryptonote-nodejs-pool/blob/master/deployment/cryptonote-nodejs-pool.service) to create the systemd service `/lib/systemd/system/cryptonote-nodejs-pool.service`
+Use this [example](https://github.com/vermin/wazn-nodejs-pool/blob/custom/deployment/wazn-nodejs-pool.service) to create the systemd service `/lib/systemd/system/wazn-nodejs-pool.service`
 Then enable and start the service with the following commands :
 
 ```
@@ -643,7 +641,7 @@ var email = "support@poolhost.com";
 var telegram = "https://t.me/WAZNPool";
 
 /* Pool Discord URL */
-var discord = "https://discord.gg/pTDr4hr";
+var discord = "https://discord.gg/ZmBra64";
 
 /*Pool Facebook URL */
 var facebook = "https://www.facebook.com/wazn.io";
@@ -664,7 +662,6 @@ var themeCss = "themes/light.css";
 var defaultLang = 'en';
 
 ```
-
 #### 5) Customize your website
 
 The following files are included so that you can customize your pool website without having to make significant changes
@@ -727,7 +724,6 @@ By adding this you will need to update your `api` variable in the `website_examp
 
 You no longer need to include the port in the variable because of the proxy connection.
 
-
 #### Upgrading
 When updating to the latest code its important to not only `git pull` the latest from this repo, but to also update
 the Node.js modules, and any config files that may have been changed.
@@ -742,21 +738,17 @@ Documentation for JSON-RPC commands can be found here:
 * Daemon https://wiki.bytecoin.org/wiki/JSON_RPC_API
 * Wallet https://wiki.bytecoin.org/wiki/Wallet_JSON_RPC_API
 
-
 Curl can be used to use the JSON-RPC commands from command-line. Here is an example of calling `getblockheaderbyheight` for block 100:
 
 ```bash
 curl 127.0.0.1:18081/json_rpc -d '{"method":"getblockheaderbyheight","params":{"height":100}}'
 ```
 
-
 ### Monitoring Your Pool
 
 * To inspect and make changes to redis I suggest using [redis-commander](https://github.com/joeferner/redis-commander)
 * To monitor server load for CPU, Network, IO, etc - I suggest using [Netdata](https://github.com/firehol/netdata)
 * To keep your pool node script running in background, logging to file, and automatically restarting if it crashes - I suggest using [forever](https://github.com/nodejitsu/forever) or [PM2](https://github.com/Unitech/pm2)
-
-
 
 ## License
 ```

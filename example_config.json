@@ -1,17 +1,14 @@
 {
-    "poolHost": "pool.wazn.io",
-
+    "poolHost": "your.pool.host",
     "coin": "WAZN",
     "symbol": "WAZN",
     "coinUnits": 1000000,
     "coinDecimalPlaces": 6,
     "coinDifficultyTarget": 120,
-
     "daemonType": "default",
-    "cnAlgorithm": "cryptonight_upx",
+    "cnAlgorithm": "wazn",
     "cnVariant": 1,
     "cnBlobType": 0,
-
     "logging": {
         "files": {
             "level": "info",
@@ -23,11 +20,10 @@
             "colors": true
         }
     },
-
     "poolServer": {
         "enabled": true,
         "clusterForks": "auto",
-        "poolAddress": "addpoolwallet",
+        "poolAddress": "addwallet",
         "AddressPrefix": 1274160,
         "intAddressPrefix": 3910448,
         "blockRefreshInterval": 1000,
@@ -38,27 +34,22 @@
         "ports": [
             {
                 "port": 3333,
-                "difficulty": 5000,
-                "desc": "Low end hardware"
+                "difficulty": 50000,
+                "desc": "Economy CPU or GPU"
             },
             {
                 "port": 4444,
-                "difficulty": 15000,
-                "desc": "Mid range hardware"
+                "difficulty": 200000,
+                "desc": "Gaming CPU or GPU"
             },
             {
                 "port": 5555,
-                "difficulty": 25000,
-                "desc": "High end hardware"
-            },
-            {
-                "port": 7777,
                 "difficulty": 500000,
-                "desc": "Cloud-mining / NiceHash"
+                "desc": "GPU Mining Rig"
             },
             {
                 "port": 9099,
-                "difficulty": 25000,
+                "difficulty": 1000,
                 "desc": "Hidden port",
                 "hidden": true
             }
@@ -87,7 +78,7 @@
         },
         "banning": {
             "enabled": true,
-            "time": 600,
+            "time": 60,
             "invalidPercent": 25,
             "checkThreshold": 30
         },
@@ -98,56 +89,52 @@
             "lastBlockCheckRate": 1
          }
     },
-
     "payments": {
         "enabled": true,
         "interval": 7200,
         "maxAddresses": 50,
-        "mixin": 8,
+        "mixin": 5,
         "priority": 0,
-        "transferFee": 40000,
+        "transferFee": 50000,
+        "dynamicTransferFee": true,
         "minerPayFee" : true,
         "minPayment": 10000000,
-        "maxTransactionAmount": 10000000000,
-        "denomination": 1000000
+        "maxPayment": null,
+        "maxTransactionAmount": 1000000000,
+        "denomination": 100000
     },
-
     "blockUnlocker": {
         "enabled": true,
         "interval": 30,
         "depth": 60,
-        "poolFee": 0.0,
+        "poolFee": 0.2,
         "devDonation": 0.0,
         "networkFee": 0.0
     },
-
     "api": {
         "enabled": true,
-        "hashrateWindow": 600,
-        "updateInterval": 5,
+        "hashrateWindow": 300,
+        "updateInterval": 10,
         "bindIp": "0.0.0.0",
         "port": 8117,
         "blocks": 30,
         "payments": 30,
-        "password": "addapipass",
+        "password": "addpassword",
         "ssl": false,
         "sslPort": 8119,
         "sslCert": "./cert.pem",
         "sslKey": "./privkey.pem",
         "sslCA": "./chain.pem",
-        "trustProxyIP": true
+        "trustProxyIP": false
     },
-
     "daemon": {
         "host": "127.0.0.1",
         "port": 11787
     },
-
     "wallet": {
         "host": "127.0.0.1",
         "port": 11789
     },
-
     "redis": {
         "host": "127.0.0.1",
         "port": 6379,
@@ -155,7 +142,6 @@
         "db": 0,
         "cleanupInterval": 15
     },
-
     "notifications": {
         "emailTemplate": "email_templates/default.txt",
         "emailSubject": {
@@ -188,7 +174,6 @@
             "payment": "A payment of _%AMOUNT%_ has been sent."
         }
     },
-
     "email": {
         "enabled": false,
         "fromAddress": "your@email.com",
@@ -213,7 +198,6 @@
             "domain": "mg.yourdomain"
         }
     },
-
     "telegram": {
         "enabled": false,
         "botName": "",
@@ -241,7 +225,6 @@
             "rpcMethod": "getbalance"
         }
     },
-
     "prices": {
         "source": "tradeogre",
         "currency": "USD"
