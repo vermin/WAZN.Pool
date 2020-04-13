@@ -13,13 +13,12 @@ RUN npm update
 
 RUN mkdir -p /config
 
-EXPOSE 8119
-EXPOSE 8117
 EXPOSE 3333
 EXPOSE 4444
 EXPOSE 5555
-EXPOSE 9099
+EXPOSE 8117
+EXPOSE 8119
 
 VOLUME ["/config"]
 
-CMD node init.js -config=/config/config.json
+CMD node init.js -config=config.json
