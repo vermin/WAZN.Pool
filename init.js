@@ -36,9 +36,9 @@ if (cluster.isWorker){
         case 'daemon':
             require('./lib/daemon.js')
             break
-	case 'childDaemon':
-	    require('./lib/childDaemon.js')
-	    break
+	      case 'childDaemon':
+	          require('./lib/childDaemon.js')
+	          break
         case 'blockUnlocker':
             require('./lib/blockUnlocker.js');
             break;
@@ -68,7 +68,7 @@ log('info', logSystem, 'Starting Cryptonote Node.JS pool version %s', [version])
 // Developer donations
 if (devFee < 0.2)
     log('info', logSystem, 'Developer donation \(devDonation\) is set to %d\%, Please consider raising it to 0.2\% or higher !!!', [devFee]);
- 
+
 // Run a single module ?
 var singleModule = (function(){
     var validModules = ['pool', 'api', 'unlocker', 'payments', 'chartsDataCollector', 'telegramBot'];
