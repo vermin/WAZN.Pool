@@ -7,15 +7,15 @@
     "license": "GPL-2.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/project-wazn/wazn-nodejs-pool.git"
+        "url": "https://github.com/vermin/wazn-nodejs-pool.git"
     },
     "dependencies": {
         "async": "1",
         "base58-native": "*",
         "bignum": "*",
         "cli-color": "*",
-        "waznutilities": "git://github.com/project-wazn/wazn-node-utilities.git",
-        "waznhashing": "git://github.com/project-wazn/wazn-node-hashing.git",
+        "waznutilities": "git://github.com/MoneroOcean/node-cryptoforknote-util.git",
+        "waznhashing": "git://github.com/MoneroOcean/node-cryptonight-hashing.git",
         "dateformat": "*",
         "mailgun.js": "*",
         "node-telegram-bot-api": "*",
