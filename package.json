@@ -1,13 +1,13 @@
 {
     "name": "wazn-nodejs-pool",
-    "version": "1.9.0",
+    "version": "2.0.0",
     "description": "High performance Node.js mining pool",
     "author": "Multiple",
     "maintained by": "vermin",
     "license": "GPL-2.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/vermin/wazn-nodejs-pool.git"
+        "url": "https://github.com/vermin/wazn-nodejs-pool/.git"
     },
     "dependencies": {
         "async": "1",
