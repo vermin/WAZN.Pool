@@ -1,69 +1,89 @@
 {
-    "poolHost": "your.pool.host",
-    "coin": "WAZN",
-    "symbol": "WAZN",
-    "coinUnits": 1000000,
-    "coinDecimalPlaces": 6,
-    "coinDifficultyTarget": 120,
-    "daemonType": "default",
-    "cnAlgorithm": "wazn",
-    "cnVariant": 1,
-    "cnBlobType": 0,
-    "logging": {
-        "files": {
-            "level": "info",
-            "directory": "logs",
-            "flushInterval": 5
-        },
-        "console": {
-            "level": "info",
-            "colors": true
-        }
-    },
-    "poolServer": {
-        "enabled": true,
-        "clusterForks": "auto",
-        "poolAddress": "addwallet",
-        "AddressPrefix": 1274160,
-        "intAddressPrefix": 3910448,
-        "blockRefreshInterval": 1000,
-        "minerTimeout": 900,
-        "sslCert": "./cert.pem",
-        "sslKey": "./privkey.pem",
-        "sslCA": "./chain.pem",
-        "ports": [
+  "poolHost": "your.pool.host",
+	"coin": "Wazn",
+	"symbol": "WAZN",
+	"coinUnits": 1000000,
+	"coinDecimalPlaces": 6,
+  "coinDifficultyTarget": 120,
+	"blockchainExplorer": "http://explorer.wazn.io/block/{id}",
+	"transactionExplorer": "http://explorer.wazn.io/tx/{id}",
+  "daemonType": "default",
+	"cnAlgorithm": "randomx",
+	"cnVariant": 0,
+  "cnBlobType": 0,
+	"includeHeight": false,
+	"isRandomX": true,
+
+  "logging": {
+		"files": {
+			"level": "info",
+			"directory": "logs",
+			"flushInterval": 5
+		},
+		"console": {
+			"level": "info",
+			"colors": true
+		}
+  },
+	"childPools": null,
+  "poolServer": {
+    "enabled": true,
+		"mergedMining": false,
+    "clusterForks": "auto",
+		"poolAddress": "** Your pool wallet address **",
+		"intAddressPrefix": null,
+    "blockRefreshInterval": 1000,
+		"minerTimeout": 900,
+		"sslCert": "./cert.pem",
+		"sslKey": "./privkey.pem",
+		"sslCA": "./chain.pem",
+		"ports": [
             {
                 "port": 3333,
                 "difficulty": 50000,
-                "desc": "Economy CPU or GPU"
+                "desc": "Low end hardware"
             },
             {
                 "port": 4444,
-                "difficulty": 200000,
-                "desc": "Gaming CPU or GPU"
+                "difficulty": 150000,
+                "desc": "Mid range hardware"
             },
             {
                 "port": 5555,
-                "difficulty": 500000,
-                "desc": "GPU Mining Rig"
+			        	"difficulty": 250000,
+			        	"desc": "High end hardware"
+            },
+		      	{
+		        		"port": 7777,
+                "difficulty": 2500000,
+                "desc": "Cloud-mining / NiceHash"
             },
             {
                 "port": 9099,
-                "difficulty": 1000,
+                "difficulty": 50000,
                 "desc": "Hidden port",
                 "hidden": true
+            },
+		      	{
+		        		"port": 9999,
+		        		"difficulty": 20000,
+			        	"desc": "SSL connection",
+				        "ssl": true
             }
         ],
         "varDiff": {
             "minDiff": 100,
             "maxDiff": 100000000,
-            "targetTime": 60,
-            "retargetTime": 30,
+            "targetTime": 120,
+            "retargetTime": 60,
             "variancePercent": 30,
             "maxJump": 100
         },
         "paymentId": {
-            "addressSeparator": "+"
+		     	"addressSeparator": ".",
+		    	"validation": false,
+		    	"validations": ["1,16", "64"],
+		    	"ban": true
         },
         "fixedDiff": {
             "enabled": true,
@@ -93,7 +113,7 @@
         "enabled": true,
         "interval": 7200,
         "maxAddresses": 50,
-        "mixin": 5,
+		    "mixin": 7,
         "priority": 0,
         "transferFee": 50000,
         "dynamicTransferFee": true,
@@ -107,7 +127,7 @@
         "enabled": true,
         "interval": 30,
         "depth": 60,
-        "poolFee": 0.2,
+        "poolFee": 0.5,
         "devDonation": 0.0,
         "networkFee": 0.0
     },
@@ -119,14 +139,15 @@
         "port": 8117,
         "blocks": 30,
         "payments": 30,
-        "password": "addpassword",
+	    	"password": "your_password",
         "ssl": false,
         "sslPort": 8119,
         "sslCert": "./cert.pem",
         "sslKey": "./privkey.pem",
         "sslCA": "./chain.pem",
-        "trustProxyIP": false
+        "trustProxyIP": true
     },
+
     "daemon": {
         "host": "127.0.0.1",
         "port": 11787
@@ -135,6 +156,7 @@
         "host": "127.0.0.1",
         "port": 11789
     },
+
     "redis": {
         "host": "127.0.0.1",
         "port": 6379,
@@ -142,6 +164,7 @@
         "db": 0,
         "cleanupInterval": 15
     },
+
     "notifications": {
         "emailTemplate": "email_templates/default.txt",
         "emailSubject": {
@@ -174,6 +197,7 @@
             "payment": "A payment of _%AMOUNT%_ has been sent."
         }
     },
+
     "email": {
         "enabled": false,
         "fromAddress": "your@email.com",
@@ -198,6 +222,7 @@
             "domain": "mg.yourdomain"
         }
     },
+
     "telegram": {
         "enabled": false,
         "botName": "",
@@ -225,8 +250,9 @@
             "rpcMethod": "getbalance"
         }
     },
+
     "prices": {
-        "source": "tradeogre",
+	    	"source": "cryptonator",
         "currency": "USD"
     },
 
