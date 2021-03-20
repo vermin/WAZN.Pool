@@ -1,19 +1,17 @@
 [Unit]
-Description=Mining Pool Service
+Description=Wazn Pool
 After=network.target
 
 [Service]
+User=pool-user
+Group=pool-user
+WorkingDirectory=/path/to/your/pool
+
 Type=simple
+SyslogIdentifier=pool
+ExecStart=/usr/bin/node init.js -config=wazn.json
+
 Restart=always
-SyslogIdentifier=wazn-nodejs-pool
-ExecStart=/usr/bin/node init.js
-
-# Change to the location of wazn-node-js-pool
-WorkingDirectory=/path/to/your/wazn-nodejs-pool/pool
-
-# Set user and group that will run the pool
-User=pool
-Group=pool
 
 [Install]
 WantedBy=multi-user.target
