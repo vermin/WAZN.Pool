@@ -1,15 +1,16 @@
 {
     "name": "wazn-nodejs-pool",
-    "version": "1.9.0",
+    "version": "2.0.0",
+    "description": "High performance Node.js mining pool",
+    "author": "Multiple",
+    "maintained by": "vermin",
     "license": "GPL-2.0",
-    "Original author": "Daniel Vandal",
-    "Maintained by": "vermin",
     "repository": {
         "type": "git",
-        "url": "https://github.com/project-wazn/wazn-nodejs-pool.git"
+        "url": "https://github.com/vermin/wazn-nodejs-pool.git"
     },
     "dependencies": {
-        "async": "1",
+      "async": "^3.2.0",
         "base58-native": "*",
         "bignum": "*",
         "cli-color": "*",
@@ -18,7 +19,7 @@
         "dateformat": "*",
         "mailgun.js": "*",
         "node-telegram-bot-api": "*",
-        "nodemailer": "2.7.2",
+        "nodemailer": "^6.4.18",
         "nodemailer-sendmail-transport": "*",
         "redis": "*",
         "socket.io": "^2.1.1",

@@ -1,14 +1,19 @@
 {
-    "poolHost": "dig.wazn.io",
-    "coin": "WAZN",
+    "poolHost": "your.pool.host",
+  	"coin": "Wazn",
     "symbol": "WAZN",
-    "coinUnits": 1000000,
-    "coinDecimalPlaces": 6,
+    "coinUnits": 1000000000,
+    "coinDecimalPlaces": 9,
     "coinDifficultyTarget": 120,
+  	"blockchainExplorer": "https://explorer.wazn.io/block/{id}",
+	  "transactionExplorer": "https://explorer.wazn.io/tx/{id}",
     "daemonType": "default",
-    "cnAlgorithm": "cryptonight_upx",
-    "cnVariant": 1,
+	  "cnAlgorithm": "randomx",
+	  "cnVariant": 0,
     "cnBlobType": 0,
+	  "includeHeight": true,
+	  "isRandomX": true,
+
     "logging": {
         "files": {
             "level": "info",
@@ -23,9 +28,9 @@
     "poolServer": {
         "enabled": true,
         "clusterForks": "auto",
-        "poolAddress": "addwallet",
-        "AddressPrefix": 1274160,
-        "intAddressPrefix": 3910448,
+        "poolAddress": "**Your pool wallet address**",
+        "AddressPrefix": 487728,
+        "intAddressPrefix": 3124016,
         "blockRefreshInterval": 1000,
         "minerTimeout": 900,
         "sslCert": "./cert.pem",
@@ -48,22 +53,36 @@
                 "desc": "GPU Mining Rig"
             },
             {
+                "port": 7777,
+                "difficulty": 2500000,
+                "desc": "Cloud-mining / NiceHash"
+            },
+            {
                 "port": 9099,
-                "difficulty": 1000,
+                "difficulty": 50000,
                 "desc": "Hidden port",
                 "hidden": true
+            },
+            {
+                "port": 9999,
+                "difficulty": 25000,
+                "desc": "SSL connection",
+                "ssl": true
             }
         ],
         "varDiff": {
-            "minDiff": 100,
+            "minDiff": 25000,
             "maxDiff": 100000000,
-            "targetTime": 60,
-            "retargetTime": 30,
+            "targetTime": 120,
+            "retargetTime": 60,
             "variancePercent": 30,
             "maxJump": 100
         },
         "paymentId": {
-            "addressSeparator": "+"
+            "addressSeparator": "+",
+            "validation": false,
+            "validations": ["1,16", "64"],
+            "ban": true
         },
         "fixedDiff": {
             "enabled": true,
@@ -78,7 +97,7 @@
         },
         "banning": {
             "enabled": true,
-            "time": 60,
+            "time": 300,
             "invalidPercent": 25,
             "checkThreshold": 30
         },
@@ -91,35 +110,35 @@
     },
     "payments": {
         "enabled": true,
-        "interval": 7200,
+        "interval": 1200,
         "maxAddresses": 50,
-        "mixin": 5,
+		    "mixin": 7,
         "priority": 0,
-        "transferFee": 50000,
+        "transferFee": 25000000,
         "dynamicTransferFee": true,
         "minerPayFee" : true,
-        "minPayment": 10000000,
-        "maxPayment": null,
-        "maxTransactionAmount": 1000000000,
+        "minPayment": 10000000000,
+        "maxPayment": 20000000000000,
+        "maxTransactionAmount": 1000000000000,
         "denomination": 100000
     },
     "blockUnlocker": {
         "enabled": true,
         "interval": 30,
         "depth": 60,
-        "poolFee": 0.2,
+        "poolFee": 0.5,
         "devDonation": 0.0,
         "networkFee": 0.0
     },
     "api": {
         "enabled": true,
         "hashrateWindow": 300,
-        "updateInterval": 10,
+        "updateInterval": 5,
         "bindIp": "0.0.0.0",
         "port": 8117,
         "blocks": 30,
         "payments": 30,
-        "password": "addpassword",
+	    	"password": "**Your password**",
         "ssl": false,
         "sslPort": 8119,
         "sslCert": "./cert.pem",
@@ -133,7 +152,7 @@
     },
     "wallet": {
         "host": "127.0.0.1",
-        "port": 11789
+        "port": 11790
     },
     "redis": {
         "host": "127.0.0.1",
