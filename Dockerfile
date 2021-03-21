@@ -2,9 +2,8 @@
 FROM node:8-slim
 
 RUN apt-get update \
-  && DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs-legacy npm git libboost1.55-all libssl-dev \
-  && rm -rf /var/lib/apt/lists/* && \
-  chmod +x /wait-for-it.sh
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs git libboost-all-dev libssl-dev make gcc g++ libsodium-dev\
+  && rm -rf /var/lib/apt/lists/*
 
 ADD . /pool/
 WORKDIR /pool/
@@ -13,12 +12,11 @@ RUN npm update
 
 RUN mkdir -p /config
 
-EXPOSE 3333
-EXPOSE 4444
-EXPOSE 5555
 EXPOSE 8117
-EXPOSE 8119
+EXPOSE 3333
+EXPOSE 5555
+EXPOSE 7777
 
 VOLUME ["/config"]
 
-CMD node init.js -config=config.json
+CMD node init.js -config=/config/config.json
