@@ -1,14 +1,16 @@
 {
     "poolHost": "your.pool.host",
-    "coin": "WAZN",
+    "coin": "Wazn",
     "symbol": "WAZN",
-    "coinUnits": 1000000,
-    "coinDecimalPlaces": 6,
+    "coinUnits": 1000000000,
+    "coinDecimalPlaces": 9,
     "coinDifficultyTarget": 120,
     "daemonType": "default",
-    "cnAlgorithm": "wazn",
-    "cnVariant": 1,
+    "cnAlgorithm": "randomx",
+    "cnVariant": 0,
     "cnBlobType": 0,
+    "includeHeight": true,
+  	"isRandomX": true,
     "logging": {
         "files": {
             "level": "info",
@@ -24,8 +26,8 @@
         "enabled": true,
         "clusterForks": "auto",
         "poolAddress": "addwallet",
-        "AddressPrefix": 1274160,
-        "intAddressPrefix": 3910448,
+        "AddressPrefix": 487728,
+        "intAddressPrefix": 3124016,
         "blockRefreshInterval": 1000,
         "minerTimeout": 900,
         "sslCert": "./cert.pem",
@@ -48,22 +50,36 @@
                 "desc": "GPU Mining Rig"
             },
             {
+                "port": 7777,
+                "difficulty": 2500000,
+                "desc": "Cloud-mining / NiceHash"
+            },
+            {
                 "port": 9099,
-                "difficulty": 1000,
+                "difficulty": 25000,
                 "desc": "Hidden port",
                 "hidden": true
+            },
+            {
+                "port": 9999,
+                "difficulty": 200000,
+                "desc": "SSL connection",
+                "ssl": true
             }
         ],
         "varDiff": {
-            "minDiff": 100,
-            "maxDiff": 100000000,
+            "minDiff": 25000,
+            "maxDiff": 5000000,
             "targetTime": 60,
             "retargetTime": 30,
             "variancePercent": 30,
             "maxJump": 100
         },
         "paymentId": {
-            "addressSeparator": "+"
+            "addressSeparator": "+",
+            "validation": false,
+            "validations": ["1,16", "64"],
+            "ban": true
         },
         "fixedDiff": {
             "enabled": true,
@@ -78,7 +94,7 @@
         },
         "banning": {
             "enabled": true,
-            "time": 60,
+            "time": 600,
             "invalidPercent": 25,
             "checkThreshold": 30
         },
@@ -91,23 +107,23 @@
     },
     "payments": {
         "enabled": true,
-        "interval": 7200,
+        "interval": 1200,
         "maxAddresses": 50,
-        "mixin": 5,
+        "mixin": 7,
         "priority": 0,
-        "transferFee": 50000,
+        "transferFee": 25000000,
         "dynamicTransferFee": true,
         "minerPayFee" : true,
-        "minPayment": 10000000,
-        "maxPayment": null,
-        "maxTransactionAmount": 1000000000,
+        "minPayment": 10000000000,
+        "maxPayment": 20000000000000,
+        "maxTransactionAmount": 1000000000000,
         "denomination": 100000
     },
     "blockUnlocker": {
         "enabled": true,
         "interval": 30,
         "depth": 60,
-        "poolFee": 0.2,
+        "poolFee": 0.5,
         "devDonation": 0.0,
         "networkFee": 0.0
     },
