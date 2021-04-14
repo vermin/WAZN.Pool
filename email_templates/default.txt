@@ -1,6 +1,6 @@
-Hello,
+Dear miner,
 
 %MESSAGE%
 
 Thank you,
-Cheers, the allmighty BlockMaster at %POOL_HOST%
+Kind regards, Admin at %POOL_HOST%
